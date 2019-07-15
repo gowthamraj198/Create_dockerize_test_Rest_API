@@ -112,7 +112,7 @@
                 <executions>
                     <execution>
                     <id>id.post-install</id>
-                    <phase>install</phase>
+                    <phase>deploy</phase>
                     <goals>
                         <goal>run</goal>
                     </goals>
