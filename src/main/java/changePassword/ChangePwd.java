@@ -132,7 +132,7 @@ public class ChangePwd {
     {
         if(checkAllConditions(passwordInSystem,oldPassword,newPassword))
         {
-//            readWriteJSON.writeJSON(newPassword);
+            readWriteJSON.writeJSON(newPassword);
             return true;
         }
         else

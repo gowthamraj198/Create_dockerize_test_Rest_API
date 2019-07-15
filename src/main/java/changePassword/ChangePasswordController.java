@@ -9,7 +9,7 @@ public class ChangePasswordController {
 
     ChangePwd changePwd = new ChangePwd();
     static ReadWriteJSON readWriteJSON = new ReadWriteJSON();
-    static String passwordInSystem = readWriteJSON.readJSON();
+    static String passwordInSystem;
 
     @PostMapping(
             consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
@@ -19,6 +19,7 @@ public class ChangePasswordController {
     {
         System.out.println(passwordsDetails.getnewPassword());
         System.out.println(passwordsDetails.getOldPassword());
+        passwordInSystem = readWriteJSON.readJSON();
         System.out.println(passwordInSystem);
         return changePwd.updatePasswordAtBackend(passwordInSystem,passwordsDetails.getOldPassword(),passwordsDetails.getnewPassword());
     }
