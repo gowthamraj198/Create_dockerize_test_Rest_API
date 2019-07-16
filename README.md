@@ -8,8 +8,12 @@ ChangePasswordUnitTest has the unit tests for the change password functionality
 To build the docker image
 - `docker-compose build`
 
+The above command will run all the unit test cases and build the project.
+
 To attach the image to the container and bring the change password service up
 - `docker-compose up`
+
+The above command will bring the service up and run the api tests after the service gets up.
 
 Once the service is up Hit the uri from postman or any service testing tool
 - `http://localhost:9999/changepassword` 
