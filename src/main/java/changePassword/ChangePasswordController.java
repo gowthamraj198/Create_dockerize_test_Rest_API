@@ -15,6 +15,15 @@ public class ChangePasswordController {
     static ReadWriteJSON readWriteJSON = new ReadWriteJSON();
     static String passwordInSystem;
 
+    @GetMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public String currentPassword()
+    {
+        return readWriteJSON.readJSON();
+    }
+
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}

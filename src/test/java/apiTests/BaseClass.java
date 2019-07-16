@@ -6,9 +6,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.json.simple.JSONObject;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -29,6 +27,11 @@ public class BaseClass {
     @AfterTest
     public void afterTest()
     {
+        readWriteJSON.writeJSON(existingPasswordForTest);
+    }
+
+    @BeforeSuite
+    public void beforeSuite() {
         readWriteJSON.writeJSON(existingPasswordForTest);
     }
 

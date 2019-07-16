@@ -27,3 +27,6 @@ with request body in JSON format like below
 After every hit, make sure you interchange old and new password (in this example)
 
 Response will be true or false with appropriate status code
+
+To Run Api tests
+- `mvn test -Papi-tests`

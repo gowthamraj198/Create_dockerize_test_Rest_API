@@ -7,7 +7,7 @@ public class ChangePasswordApiTest extends BaseClass{
     Response response;
 
 
-    @Test(dataProvider = "validPassword")
+    @Test(dataProvider = "validPassword", groups= "setCurrentPassword")
     public void updatePassword(String oldPassword, String newPassword) {
 
         response = test(jsonObject(oldPassword,newPassword),"application/json");
