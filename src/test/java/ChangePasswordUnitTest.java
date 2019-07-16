@@ -3,7 +3,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ChangePasswordTest {
+public class ChangePasswordUnitTest {
     ChangePwd changePwd = new ChangePwd();
 
     @Test
