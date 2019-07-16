@@ -102,27 +102,31 @@ public class ChangePwd {
     public boolean checkAllConditions(String passwordInSystem,String oldPassword,String newPassword) {
         if(isOldPasswordValid(passwordInSystem,oldPassword))
         {
-            if(validPassword(oldPassword))
+            if(validPassword(newPassword))
             {
                 if(lessThan80PercentMatchWithOldPassword(oldPassword, newPassword) && verifySpecialCharCount(newPassword)
                         && verifyNumbersNotMoreThanHalf(newPassword) && verifyMaxOccurenceNotMoreThanFour(newPassword))
                 {
                     return true;
                 }
-                else
+                else {
                     return false;
+                }
             }
-            else
+            else {
                 return false;
+            }
         }
-        else
+        else {
             return false;
+        }
 //        System.out.println(validPassword(newPassword));
 //        System.out.println(isOldPasswordValid(passwordInSystem,oldPassword));
 //        System.out.println(lessThan80PercentMatchWithOldPassword(oldPassword, newPassword));
 //        System.out.println(verifySpecialCharCount(newPassword));
 //        System.out.println(verifyNumbersNotMoreThanHalf(newPassword));
 //        System.out.println(verifyMaxOccurenceNotMoreThanFour(newPassword));
+//        return false;
     }
 
     /*
@@ -130,6 +134,10 @@ public class ChangePwd {
      */
     public boolean updatePasswordAtBackend(String passwordInSystem,String oldPassword,String newPassword)
     {
+        System.out.println(passwordInSystem);
+        System.out.println("old: " + oldPassword);
+        System.out.println(newPassword);
+        System.out.println(checkAllConditions(passwordInSystem,oldPassword,newPassword));
         if(checkAllConditions(passwordInSystem,oldPassword,newPassword))
         {
             readWriteJSON.writeJSON(newPassword);
@@ -142,17 +150,14 @@ public class ChangePwd {
     /*
         Function to return new password
      */
-    public String returnNewPassword()
-    {
-        return readWriteJSON.readJSON();
-    }
 
     public static void main(String[] args) {
-        String newPassword = "abcdefghijABCDEFGH12345@$!&";
-        String oldPassword = "ABCDEFGHabcdefgh24356554!$";   //this is same as password in the system
+        String oldPassword = "SDFUTRYmnbqmwebmw12!@$";
+        String newPassword = "abcdefghijABCDEFGH123d@$!&";   //this is same as password in the system
         ChangePwd changePwd = new ChangePwd();
-        System.out.println(changePwd.updatePasswordAtBackend(passwordInSystem,oldPassword,newPassword));
-        System.out.println(changePwd.returnNewPassword());
+//        System.out.println(changePwd.checkAllConditions(passwordInSystem,oldPassword,newPassword));
+//        System.out.println(changePwd.updatePasswordAtBackend(passwordInSystem,oldPassword,newPassword));
+//        System.out.println(changePwd.returnNewPassword());
     }
 
 }

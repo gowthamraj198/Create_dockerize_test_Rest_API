@@ -16,23 +16,24 @@ public class ChangePasswordController {
     static String passwordInSystem;
 
     @PostMapping(
-            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
-            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public boolean changePassword(@RequestBody ChangePasswordRequestModel passwordsDetails)
-    {
-        System.out.println(passwordsDetails.getnewPassword());
-        System.out.println(passwordsDetails.getOldPassword());
+    public boolean changePassword(@RequestBody ChangePasswordRequestModel passwordsDetails) {
         passwordInSystem = readWriteJSON.readJSON();
-        System.out.println(passwordInSystem);
-        if (changePwd.updatePasswordAtBackend(passwordInSystem,passwordsDetails.getOldPassword(),passwordsDetails.getnewPassword())) {
-            return true;
+
+        if(passwordsDetails.getOldPassword()==null || passwordsDetails.getOldPassword()=="" || passwordsDetails.getnewPassword()==null || passwordsDetails.getnewPassword()=="")
+        {
+            throw new IllegalArgumentException("Old and new password are mandatory");
         }
         else
         {
-            throw new IllegalArgumentException("New Password is not meeting all criterias");
+            if (changePwd.updatePasswordAtBackend(passwordInSystem, passwordsDetails.getOldPassword(), passwordsDetails.getnewPassword())) {
+                return true;
+            } else {
+                throw new IllegalArgumentException("New Password is not meeting all criteria");
+            }
         }
-
     }
 
     @ExceptionHandler

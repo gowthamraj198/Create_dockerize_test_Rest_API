@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ClientLink_FE2ET_Suite_Web" parallel="classes" thread-count="1">
+
+    <test name="Change_Password_API_Tests">
+        <classes>
+            <class name="ChangePasswordUnitTest"/>
+        </classes>
+    </test>
+</suite>

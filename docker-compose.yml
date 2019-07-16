@@ -10,3 +10,10 @@ services:
     ports:
         - "9999:9999"
     command: mvn spring-boot:run
+
+  api-tests:
+      image: changepassword:t1
+      container_name: api-tests
+      depends_on:
+            - "changepassword"
+      command: mvn test -Papi-tests
