@@ -14,7 +14,7 @@ public class BaseClass {
     final static String ROOT_URI = "http://localhost:7134";
     ReadWriteJSON readWriteJSON = new ReadWriteJSON();
     RequestSpecification request;
-    static String existingPasswordForTest = "SDFUTRYmnbqmwebmw12!@$";
+    static String existingPasswordForTest = "SDFUTRYmnbqmwebmw12!@$3";
     JSONObject requestParams = new JSONObject();
 
 
@@ -37,12 +37,12 @@ public class BaseClass {
 
     @DataProvider(name = "validPassword")
     public static Object[][] validpasswords() {
-        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$", "abcdefghijABCDEFGH123@$!"}};
+        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}};
     }
 
     @DataProvider(name = "invalidPassword")
     public static Object[][] invalidpasswords() {
-        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$", "abcdefghijABCDEFGH123@$!"}};
+        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}};
     }
 
     @DataProvider(name = "missingBodyParameters")
@@ -58,7 +58,7 @@ public class BaseClass {
     @DataProvider(name = "incorrectOldPassword")
     public static Object[][] updatePassword_invalidNewPassword() {
         return new Object[][]{
-                {"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}
+                {"SDFUTRYmnbqmwebmw12!@$34", "abcdefghijABCDEFGH123@$!"}
         };
     }
 

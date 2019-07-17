@@ -8,7 +8,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     ports:
-        - "9999:9999"
+        - "7134:7134"
     command: mvn spring-boot:run
 
   api-tests:
