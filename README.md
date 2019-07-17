@@ -16,7 +16,7 @@ To attach the image to the container and bring the change password service up
 The above command will bring the service up and run the api tests after the service gets up.
 
 Once the service is up Hit the uri from postman or any service testing tool
-- `http://localhost:9999/changepassword` 
+- `http://localhost:7134/changepassword` 
 
 with request body in JSON format like below
 - `{

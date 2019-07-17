@@ -11,7 +11,7 @@ import org.testng.annotations.*;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class BaseClass {
-    final static String ROOT_URI = "http://localhost:9999";
+    final static String ROOT_URI = "http://localhost:7134";
     ReadWriteJSON readWriteJSON = new ReadWriteJSON();
     RequestSpecification request;
     static String existingPasswordForTest = "SDFUTRYmnbqmwebmw12!@$";
@@ -55,10 +55,17 @@ public class BaseClass {
         };
     }
 
+    @DataProvider(name = "incorrectOldPassword")
+    public static Object[][] updatePassword_invalidNewPassword() {
+        return new Object[][]{
+                {"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}
+        };
+    }
+
     public Response test(JSONObject requestParams, String content_type) {
         request.header("Content-Type", content_type);
         request.body(requestParams.toJSONString());
-        return request.post("http://localhost:9999/changepassword");
+        return request.post("http://localhost:7134/changepassword");
     }
 
     public String returnNewPassword() {

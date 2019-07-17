@@ -41,11 +41,5 @@ public class ReadWriteJSON {
         }
 
     }
-
-    public static void main(String[] args) throws IOException, ParseException {
-        ReadWriteJSON readWriteJSON = new ReadWriteJSON();
-        readWriteJSON.readJSON();
-//        readWriteJSON.writeJSON(readWriteJSON.readJSON()+"1");
-    }
 }
 

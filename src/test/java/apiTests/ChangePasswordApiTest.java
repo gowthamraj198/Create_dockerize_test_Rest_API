@@ -23,8 +23,14 @@ public class ChangePasswordApiTest extends BaseClass{
     }
 
     @Test(dataProvider = "missingBodyParameters")
-    public void updatePassword_invalid(String oldPassword, String newPassword) {
+    public void updatePassword_invalidBodyParameters(String oldPassword, String newPassword) {
         response = test(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,400,"Old and new password are mandatory");
+    }
+
+    @Test(dataProvider = "incorrectOldPassword")
+    public void updatePassword_incorrectOldPassword(String oldPassword, String newPassword) {
+        response = test(jsonObject(oldPassword,newPassword),"application/json");
+        assertResponse(response,400,"New Password is not meeting all criteria");
     }
 }
