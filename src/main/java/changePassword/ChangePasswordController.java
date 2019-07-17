@@ -21,7 +21,7 @@ public class ChangePasswordController {
     )
     public String currentPassword()
     {
-        return readWriteJSON.readJSON();
+        return new ReadWriteJSON().readJSON();
     }
 
     @PostMapping(

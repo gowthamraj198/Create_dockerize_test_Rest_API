@@ -7,30 +7,29 @@ public class ChangePasswordApiTest extends BaseClass{
     Response response;
 
 
-    @Test(dataProvider = "validPassword", groups= "setCurrentPassword")
+    @Test(dataProvider = "validPassword")
     public void updatePassword(String oldPassword, String newPassword) {
-
-        response = test(jsonObject(oldPassword,newPassword),"application/json");
+        System.out.println("Old : "+  oldPassword);
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,200,"true");
-        assertPasswordUpdate(newPassword);
+        assertGetResponse(getTest(),200,newPassword);
     }
 
     @Test(dataProvider = "validPassword")
     public void updatePasswordRequestBodyAsPlainText(String oldPassword, String newPassword) {
-
-        response = test(jsonObject(oldPassword,newPassword),"text/plain");
+        response = postTest(jsonObject(oldPassword,newPassword),"text/plain");
         assertResponse(response,415,"text/plain' not supported");
     }
 
     @Test(dataProvider = "missingBodyParameters")
     public void updatePassword_invalidBodyParameters(String oldPassword, String newPassword) {
-        response = test(jsonObject(oldPassword,newPassword),"application/json");
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,400,"Old and new password are mandatory");
     }
 
     @Test(dataProvider = "incorrectOldPassword")
     public void updatePassword_incorrectOldPassword(String oldPassword, String newPassword) {
-        response = test(jsonObject(oldPassword,newPassword),"application/json");
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,400,"New Password is not meeting all criteria");
     }
 }

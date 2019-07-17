@@ -134,9 +134,6 @@ public class ChangePwd {
      */
     public boolean updatePasswordAtBackend(String passwordInSystem,String oldPassword,String newPassword)
     {
-        System.out.println(passwordInSystem);
-        System.out.println("old: " + oldPassword);
-        System.out.println(newPassword);
         System.out.println(checkAllConditions(passwordInSystem,oldPassword,newPassword));
         if(checkAllConditions(passwordInSystem,oldPassword,newPassword))
         {

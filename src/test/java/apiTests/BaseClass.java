@@ -22,17 +22,21 @@ public class BaseClass {
     public void beforeTest()
     {
         request = RestAssured.given();
+        System.out.println("Before test existingPasswordForTest : " + existingPasswordForTest);
+        System.out.println("Before test in file : " + readWriteJSON.readJSON());
     }
 
-    @AfterTest
-    public void afterTest()
+    @BeforeTest
+    public void beforeTest1()
     {
         readWriteJSON.writeJSON(existingPasswordForTest);
+        System.out.println("After test : " + readWriteJSON.readJSON());
     }
 
     @BeforeSuite
     public void beforeSuite() {
         readWriteJSON.writeJSON(existingPasswordForTest);
+        System.out.println("Before suite : " + readWriteJSON.readJSON());
     }
 
     @DataProvider(name = "validPassword")
@@ -62,10 +66,15 @@ public class BaseClass {
         };
     }
 
-    public Response test(JSONObject requestParams, String content_type) {
+    public Response postTest(JSONObject requestParams, String content_type) {
         request.header("Content-Type", content_type);
         request.body(requestParams.toJSONString());
         return request.post("http://localhost:7134/changepassword");
+    }
+
+    public Response getTest() {
+//        request.body(requestParams.toJSONString());
+        return request.get("http://localhost:7134/changepassword");
     }
 
     public String returnNewPassword() {
@@ -89,10 +98,19 @@ public class BaseClass {
         else
             response.then().body("message", Matchers.is(message));
     }
+    public void assertGetResponse(Response response, int statusCode, String message)
+    {
+        assertEquals(response.getStatusCode(), statusCode);
+        if(statusCode==200)
+        {
+            System.out.println("getResponse : " + response.asString());
+            assertEquals(response.asString(),message);
+        }
+    }
 
     public void assertPasswordUpdate(String password)
     {
-        assertEquals(returnNewPassword(),password);
+        assertEquals(readWriteJSON.readJSON(),password);
     }
 
 
