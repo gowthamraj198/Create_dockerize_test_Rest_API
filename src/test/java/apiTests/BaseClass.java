@@ -22,49 +22,20 @@ public class BaseClass {
     public void beforeTest()
     {
         request = RestAssured.given();
-        System.out.println("Before test existingPasswordForTest : " + existingPasswordForTest);
-        System.out.println("Before test in file : " + readWriteJSON.readJSON());
     }
 
     @BeforeTest
     public void beforeTest1()
     {
         readWriteJSON.writeJSON(existingPasswordForTest);
-        System.out.println("After test : " + readWriteJSON.readJSON());
     }
 
     @BeforeSuite
     public void beforeSuite() {
         readWriteJSON.writeJSON(existingPasswordForTest);
-        System.out.println("Before suite : " + readWriteJSON.readJSON());
     }
 
-    @DataProvider(name = "validPassword")
-    public static Object[][] validpasswords() {
-        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}};
-    }
 
-    @DataProvider(name = "invalidPassword")
-    public static Object[][] invalidpasswords() {
-        return new Object[][]{{"SDFUTRYmnbqmwebmw12!@$3", "abcdefghijABCDEFGH123@$!"}};
-    }
-
-    @DataProvider(name = "missingBodyParameters")
-    public static Object[][] invalidpasswordsMissingBodyParameters() {
-        return new Object[][]{
-                {null, "abcdefghijABCDEFGH123@$!"},
-                {"missingBodyParameters", null},
-                {"missingBodyParameters", ""},
-                {"", "missingBodyParameters"}
-        };
-    }
-
-    @DataProvider(name = "incorrectOldPassword")
-    public static Object[][] updatePassword_invalidNewPassword() {
-        return new Object[][]{
-                {"SDFUTRYmnbqmwebmw12!@$34", "abcdefghijABCDEFGH123@$!"}
-        };
-    }
 
     public Response postTest(JSONObject requestParams, String content_type) {
         request.header("Content-Type", content_type);

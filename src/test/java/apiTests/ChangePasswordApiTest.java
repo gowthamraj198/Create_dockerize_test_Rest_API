@@ -3,13 +3,12 @@ package apiTests;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-public class ChangePasswordApiTest extends BaseClass{
+public class ChangePasswordApiTest extends DataProviders{
     Response response;
 
 
     @Test(dataProvider = "validPassword")
     public void updatePassword(String oldPassword, String newPassword) {
-        System.out.println("Old : "+  oldPassword);
         response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,200,"true");
         assertGetResponse(getTest(),200,newPassword);
@@ -22,13 +21,31 @@ public class ChangePasswordApiTest extends BaseClass{
     }
 
     @Test(dataProvider = "missingBodyParameters")
-    public void updatePassword_invalidBodyParameters(String oldPassword, String newPassword) {
+    public void invalidBodyParameters(String oldPassword, String newPassword) {
         response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,400,"Old and new password are mandatory");
     }
 
     @Test(dataProvider = "incorrectOldPassword")
-    public void updatePassword_incorrectOldPassword(String oldPassword, String newPassword) {
+    public void incorrectOldPassword(String oldPassword, String newPassword) {
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
+        assertResponse(response,400,"New Password is not meeting all criteria");
+    }
+
+    @Test(dataProvider = "incorrectNewPasswordWithInvalidChars")
+    public void incorrectNewPasswordWithInvalidChars(String oldPassword, String newPassword) {
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
+        assertResponse(response,400,"New Password is not meeting all criteria");
+    }
+
+    @Test(dataProvider = "incorrectNewPasswordWithoutLowerCase")
+    public void incorrectNewPasswordWithoutLowerCase(String oldPassword, String newPassword) {
+        response = postTest(jsonObject(oldPassword,newPassword),"application/json");
+        assertResponse(response,400,"New Password is not meeting all criteria");
+    }
+
+    @Test(dataProvider = "incorrectNewPasswordWithoutUpperCase")
+    public void incorrectNewPasswordWithoutUpperCase(String oldPassword, String newPassword) {
         response = postTest(jsonObject(oldPassword,newPassword),"application/json");
         assertResponse(response,400,"New Password is not meeting all criteria");
     }
