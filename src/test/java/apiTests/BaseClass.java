@@ -24,18 +24,11 @@ public class BaseClass {
         request = RestAssured.given();
     }
 
-    @BeforeTest
-    public void beforeTest1()
+    @BeforeMethod()
+    public void beforeMethod()
     {
         readWriteJSON.writeJSON(existingPasswordForTest);
     }
-
-    @BeforeSuite
-    public void beforeSuite() {
-        readWriteJSON.writeJSON(existingPasswordForTest);
-    }
-
-
 
     public Response postTest(JSONObject requestParams, String content_type) {
         request.header("Content-Type", content_type);
@@ -44,7 +37,6 @@ public class BaseClass {
     }
 
     public Response getTest() {
-//        request.body(requestParams.toJSONString());
         return request.get("http://localhost:7134/changepassword");
     }
 
@@ -74,15 +66,7 @@ public class BaseClass {
         assertEquals(response.getStatusCode(), statusCode);
         if(statusCode==200)
         {
-            System.out.println("getResponse : " + response.asString());
             assertEquals(response.asString(),message);
         }
     }
-
-    public void assertPasswordUpdate(String password)
-    {
-        assertEquals(readWriteJSON.readJSON(),password);
-    }
-
-
 }
