@@ -52,7 +52,6 @@ public class ChangePwd {
      */
     public boolean lessThan80PercentMatchWithOldPassword(String oldPassword, String newPassword) {
         JaroWinkler jw = new JaroWinkler();
-
         if (jw.similarity(oldPassword, newPassword) >= 0.8)
             return false;
         else
@@ -120,13 +119,6 @@ public class ChangePwd {
         else {
             return false;
         }
-//        System.out.println(validPassword(newPassword));
-//        System.out.println(isOldPasswordValid(passwordInSystem,oldPassword));
-//        System.out.println(lessThan80PercentMatchWithOldPassword(oldPassword, newPassword));
-//        System.out.println(verifySpecialCharCount(newPassword));
-//        System.out.println(verifyNumbersNotMoreThanHalf(newPassword));
-//        System.out.println(verifyMaxOccurenceNotMoreThanFour(newPassword));
-//        return false;
     }
 
     /*
@@ -134,7 +126,6 @@ public class ChangePwd {
      */
     public boolean updatePasswordAtBackend(String passwordInSystem,String oldPassword,String newPassword)
     {
-        System.out.println(checkAllConditions(passwordInSystem,oldPassword,newPassword));
         if(checkAllConditions(passwordInSystem,oldPassword,newPassword))
         {
             readWriteJSON.writeJSON(newPassword);
@@ -152,9 +143,6 @@ public class ChangePwd {
         String oldPassword = "SDFUTRYmnbqmwebmw12!@$";
         String newPassword = "abcdefghijABCDEFGH123d@$!&";   //this is same as password in the system
         ChangePwd changePwd = new ChangePwd();
-//        System.out.println(changePwd.checkAllConditions(passwordInSystem,oldPassword,newPassword));
-//        System.out.println(changePwd.updatePasswordAtBackend(passwordInSystem,oldPassword,newPassword));
-//        System.out.println(changePwd.returnNewPassword());
     }
 
 }
