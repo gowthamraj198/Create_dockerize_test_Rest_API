@@ -6,7 +6,7 @@ Build using the below commands:
 - `mvn clean package`
 
 Bring the service up by executing the command
-- `mvn mvn spring-boot:run`
+- `mvn spring-boot:run`
 
 Run api tests by running the command 
 - `mvn test -Papi-tests`
