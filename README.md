@@ -49,7 +49,6 @@ Response will be true or false with appropriate status code
 
 
 <b> Note: </b> <br> <br>
-
 ~ current_password.json will store the current password. Everytime, a request is made with old and new password, the old password is validated against the value in this file.
 
 ~ ChangePasswordUnitTest has the unit tests for the change password functionality
