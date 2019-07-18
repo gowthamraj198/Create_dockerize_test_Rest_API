@@ -2,16 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ClientLink_FE2ET_Suite_Web" parallel="classes" thread-count="1">
 
-    <test name="Change_Password_API_Tests">
+    <!--<test name="Change_Password_API_Tests">-->
 
-        <parameter name="oldPassword" value="SDFUTRYmnbqmwebmw12!@$" />
-        <parameter name="newPassword" value="abcdefghijABCDEFGH123@$!" />
-        <classes>
-            <class name="apiTests.ChangePasswordApiTest">
-                <!--<methods>-->
-                    <!--<include name="updatePassword"/>-->
-                <!--</methods>-->
-            </class>
-        </classes>
-    </test>
+        <!--<parameter name="oldPassword" value="SDFUTRYmnbqmwebmw12!@$" />-->
+        <!--<parameter name="newPassword" value="abcdefghijABCDEFGH123@$!" />-->
+        <!--<classes>-->
+            <!--<class name="apiTests.ChangePasswordApiTest">-->
+                <!--&lt;!&ndash;<methods>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include name="updatePassword"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;</methods>&ndash;&gt;-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>

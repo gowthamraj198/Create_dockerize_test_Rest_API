@@ -23,7 +23,6 @@ public class ReadWriteJSON {
 
         String password = (String) jsonObject.get("password");
         return password;
-
     }
 
     public void writeJSON(String newPassword)

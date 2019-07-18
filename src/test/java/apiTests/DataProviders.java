@@ -13,11 +13,6 @@ public class DataProviders extends BaseClass{
         };
     }
 
-    @DataProvider(name = "invalidPassword")
-    public static Object[][] invalidpasswords() {
-        return new Object[][]{{existingPasswordForTest, "abcdefghijABCDEFGH123@$!"}};
-    }
-
     @DataProvider(name = "missingBodyParameters")
     public static Object[][] missingBodyParameters() {
         return new Object[][]{

@@ -16,8 +16,7 @@ public class ChangePasswordController {
     static String passwordInSystem;
 
     @GetMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_PLAIN_VALUE}
     )
     public String currentPassword()
     {
@@ -26,23 +25,31 @@ public class ChangePasswordController {
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_PLAIN_VALUE}
     )
-    public boolean changePassword(@RequestBody ChangePasswordRequestModel passwordsDetails) {
+    public String changePassword(@RequestBody ChangePasswordRequestModel passwordsDetails) {
         passwordInSystem = readWriteJSON.readJSON();
+        try
+        {
 
-        if(passwordsDetails.getOldPassword()==null || passwordsDetails.getOldPassword()=="" || passwordsDetails.getnewPassword()==null || passwordsDetails.getnewPassword()=="")
-        {
-            throw new IllegalArgumentException("Old and new password are mandatory");
-        }
-        else
-        {
-            if (changePwd.updatePasswordAtBackend(passwordInSystem, passwordsDetails.getOldPassword(), passwordsDetails.getnewPassword())) {
-                return true;
-            } else {
-                throw new IllegalArgumentException("New Password is not meeting all criteria");
+            if(passwordsDetails.getOldPassword()==null || passwordsDetails.getOldPassword()=="" || passwordsDetails.getnewPassword()==null || passwordsDetails.getnewPassword()=="")
+            {
+                throw new IllegalArgumentException("Old and new password are mandatory");
+            }
+            else
+            {
+                if (changePwd.updatePasswordAtBackend(passwordInSystem, passwordsDetails.getOldPassword(), passwordsDetails.getnewPassword())) {
+                    return "Password updated successfully!";
+                } else {
+                    throw new IllegalArgumentException("New Password is not meeting all criteria");
+                }
             }
         }
+        catch(IllegalArgumentException e)
+        {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+
     }
 
     @ExceptionHandler

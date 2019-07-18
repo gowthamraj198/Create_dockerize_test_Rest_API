@@ -19,7 +19,8 @@ public class ChangePwd {
         if (actualPassword.equals(oldPassword))
             return true;
         else
-            return false;
+//            return false;
+              throw new IllegalArgumentException(ErrorMessages.incorrectOldPasswordMessage);
     }
 
     /*
@@ -28,7 +29,7 @@ public class ChangePwd {
     public boolean verifySpecialCharCount(String password) {
         String regex = "[!@#$&*]";
         if ((password.split(regex, -1).length - 1) > 4)
-            return false;
+            throw new IllegalArgumentException(ErrorMessages.maxSpecialCharsCountInNewPasswordMessage);
         else if ((password.split(regex, -1).length - 1) <= 4)
             return true;
         else
@@ -44,7 +45,7 @@ public class ChangePwd {
         if (((digitsCount * 100) / actualLengthOfPassword) < 50)
             return true;
         else
-            return false;
+            throw new IllegalArgumentException(ErrorMessages.numbersCountInNewPasswordMessage);
     }
 
     /*
@@ -53,7 +54,8 @@ public class ChangePwd {
     public boolean lessThan80PercentMatchWithOldPassword(String oldPassword, String newPassword) {
         JaroWinkler jw = new JaroWinkler();
         if (jw.similarity(oldPassword, newPassword) >= 0.8)
-            return false;
+//            return false;
+            throw new IllegalArgumentException(ErrorMessages.similarNewPasswordMessage);
         else
             return true;
     }
@@ -74,7 +76,7 @@ public class ChangePwd {
         }
         for (Map.Entry entry : charCountMap.entrySet()) {
             if (Integer.parseInt(entry.getValue().toString()) > 4) {
-                return false;
+                throw new IllegalArgumentException(ErrorMessages.numbersRepeatCountInNewPasswordMessage);
             }
         }
         return true;
@@ -89,7 +91,10 @@ public class ChangePwd {
     public boolean validPassword(String password) {
         Pattern pattern = Pattern.compile("(?=.*\\d)(?=.*[!@#$&*])(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9!@#$&*]{18,}+$");
         Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        if(matcher.matches())
+            return true;
+        else
+            throw new IllegalArgumentException(ErrorMessages.invalidNewPasswordMessage);
     }
 
     /*
@@ -98,7 +103,7 @@ public class ChangePwd {
         newPassword - new password that should satisfy all the conditions
      */
 
-    public boolean checkAllConditions(String passwordInSystem,String oldPassword,String newPassword) {
+    public boolean checkAllConditions(String passwordInSystem,String oldPassword,String newPassword) throws IllegalArgumentException{
         if(isOldPasswordValid(passwordInSystem,oldPassword))
         {
             if(validPassword(newPassword))
@@ -124,7 +129,7 @@ public class ChangePwd {
     /*
         Function to overwrite the current password if the new password matches all criteria
      */
-    public boolean updatePasswordAtBackend(String passwordInSystem,String oldPassword,String newPassword)
+    public boolean updatePasswordAtBackend(String passwordInSystem,String oldPassword,String newPassword) throws IllegalArgumentException
     {
         if(checkAllConditions(passwordInSystem,oldPassword,newPassword))
         {
