@@ -1,7 +1,9 @@
 version: 2
- jobs:
-   build:
-     steps:
-       - checkout
-       - run: echo "A first hello"
-       - run: docker-compose build
+jobs:
+  build:
+      steps:
+        - checkout
+        - setup_remote_docker
+        - run:
+            name: Start container and verify it is working
+            command: docker-compose up -d
