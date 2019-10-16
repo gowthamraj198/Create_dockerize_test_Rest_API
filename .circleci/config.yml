@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
       docker:
+        - image: docker:t1
       steps:
         - checkout
         - setup_remote_docker
