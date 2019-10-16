@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
       docker:
+        - image: maven
       steps:
         - checkout
         - setup_remote_docker
